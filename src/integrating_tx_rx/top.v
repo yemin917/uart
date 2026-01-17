@@ -2,8 +2,7 @@ module top #(
     CLK_FREQ = 50_000_000,
     BAUD_RATE = 9600
 )(
-    input clkp,
-    input clkn,
+    input clk,
     input rstn,
     input parity_mode_pc,
     input uart_rx,
@@ -15,19 +14,11 @@ module top #(
     wire tx_start;
     wire rx_done;
     
-    clk_wiz_0 clk_gen_inst(
-        .clk_in1_p(clkp),
-        .clk_in1_n(clkn),
-        .resetn(rstn),
-        .locked(clk_locked),
-        .clk_out1(clk50)
-    );
-    
     uart_rx #(
         .CLK_FREQ(CLK_FREQ),
         .BAUD_RATE(BAUD_RATE)
     ) uart_rx_inst (
-        .clk(clk50),
+        .clk(clk),
         .rstn(rstn),
         .rx_line(uart_rx),
         .parity_mode(parity_mode_pc),
@@ -40,7 +31,7 @@ module top #(
         .CLK_FREQ(CLK_FREQ),
         .BAUD_RATE(BAUD_RATE)
     ) uart_tx_inst (
-        .clk(clk50),
+        .clk(clk),
         .rstn(rstn),
         .tx_start(tx_start),
         .tx_data(tx_data),
@@ -50,7 +41,7 @@ module top #(
     );
 
      uart_ctrl uart_ctrl_inst(
-        .clk(clk50),
+        .clk(clk),
         .rstn(rstn),
         .rx_data(rx_data),
         .rx_done(rx_done),
