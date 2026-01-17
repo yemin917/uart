@@ -29,6 +29,55 @@ The project covers the full FPGA development flow:
 - Testbench waveform verification
 - FPGA bitstream generation and download
 
+## How to Run
+Follow the steps below to build and run the UART design on FPGA using Vivado.
+
+1. Clone the repository
+```bash
+git clone https://github.com/yemin917/uart.git
+cd uart
+
+2. Open Vivado project
+- Launch Xilinx Vivado
+- Click Open Project
+- Select the .xpr file (or create a new project and add source files manually)
+
+If creating a new project:
+- Add files from src/
+- Add constraint file from constraints/
+- Add testbench files from tb/
+
+3. Run Simulation
+- Go to Flow Navigator → Run Simulation → Run Behavioral Simulation
+- Check UART TX/RX waveform behavior
+- Verify start bit, data bits, and stop bit timing
+
+4.Synthesis & Implementation
+- Click Run Synthesis
+- Click Run Implementation
+- Fix timing or constraint issues if any appear
+
+5. Generate Bitstream
+Click Generate Bitstream
+
+6. Program FPGA
+- Connect Zybo Z7-20 via USB
+- Open Hardware Manager
+- Click Open Target → Auto Connect
+- Program the device with generated bitstream
+
+7️. (Optional) Terminal Test
+- Open PuTTY
+- Select Serial
+- Set baud rate (e.g., 9600)
+- Connect and test UART communication
+
+⚠️ Notes
+- Make sure clock frequency matches baud rate calculation.
+- Check pin assignments in .xdc.
+- Verify RX/TX pin mapping on Zybo board.
+- Baud rate mismatch may cause garbled data.
+
 ## Verification & Simulation
 A testbench was created to verify UART transmission and reception.
 Waveforms were analyzed to confirm correct timing of:
