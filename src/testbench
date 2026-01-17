@@ -7,7 +7,7 @@ module tb_uart();
     reg [7:0] tx_data;
     //rx_line은 tx모듈의 출력과 연결되므로 reg선언X
     
-    wire tx_lline;
+    wire tx_line;
     wire tx_busy;
     wire [7:0] rx_data;
     wire rx_done;
@@ -58,18 +58,17 @@ module tb_uart();
         //test case1
         tx_data = 8'hA5;
         parity_mode = 0; //even parity
-        tx_start = 1;
-        #10 tx_start = 0; //transmission start
+        tx_start = 1; //transmission start
         
         wait(rx_done==1); //wait for reception success
         
         if (rx_data == 8'hA5 && rx_error == 0)
             $display("Test case 1 passed!");
         else begin
-            display("Test case 1 passed!");
+            $display("Test case 1 passed!");
             $stop;
         end
-        
+   
         $finish;        
     end
 endmodule
