@@ -17,7 +17,8 @@ module uart_tx #(
 );
 
     reg [2:0] state;
-    reg baud_cnt, bit_idx;
+    reg [12:0]baud_cnt;
+    reg [3:0] bit_idx;
     reg [7:0] shift_reg;
     
     localparam BAUD_CNT_MAX = CLK_FREQ / BAUD_RATE;
@@ -49,6 +50,7 @@ module uart_tx #(
                     if(baud_cnt == BAUD_CNT_MAX-1) begin
                         baud_cnt <= 0;
                         tx_line <= shift_reg[0];
+                        shift_reg <= shift_reg >> 1;
                         bit_idx <= 1;
                         state <= DATA;
                     end
