@@ -21,8 +21,7 @@ module tb_top();
         .CLK_FREQ(CLK_FREQ),
         .BAUD_RATE(BAUD_RATE)
     ) top_inst (
-        .clkp(clk),
-        .clkn(~clk),
+        .clk(clk),
         .rstn(rstn),
         .uart_rx(tx_line_pc_in), // PC UART 출력 연결
         .parity_mode_pc(parity_mode_pc),
