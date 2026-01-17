@@ -36,6 +36,7 @@ Follow the steps below to build and run the UART design on FPGA using Vivado.
 ```bash
 git clone https://github.com/yemin917/uart.git
 cd uart
+```
 
 2. Open Vivado project
 - Launch Xilinx Vivado
